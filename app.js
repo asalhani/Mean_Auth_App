@@ -24,9 +24,8 @@ mongoose.connection.on('error', (err) =>{
 // connect to MongoDB
 mongoose.connect(config.database);
 
-
 const app = express();
-
+ 
 // set port to serve backend
 const port = 3000;
 
