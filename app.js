@@ -33,6 +33,12 @@ const port = 3000;
 // Parse incoming request bodies in a middleware before your handlers.
 app.use(bodyParser.json());
 
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
 // load routing defined in users file. 
 //this is better than defining all the rouring in one file
 const users = require('./routes/users');
