@@ -5,19 +5,19 @@ const config = require('../config/database');
 // define user schema
 const UserSchema = mongose.Schema({
     name: {
-        type: string
+        type: String
     },
-    email:{
-        type: string,
+    email: {
+        type: String,
         required: true
     },
-    username:{
-        type: string,
+    username: {
+        type: String,
         required: true
     },
-    password:{
-        type: string,
-        required: string
+    password: {
+        type: String,
+        required: true
     }
 });
 
@@ -25,16 +25,27 @@ const UserSchema = mongose.Schema({
 const User = module.exports = mongose.model('User', UserSchema);
 
 // define a new function [getUserById] and expose it to outside
-module.exports.getUserById = function(id, callback){
+module.exports.getUserById = function (id, callback) {
     User.findById(id, callback);
 }
 
-module.exports.getUserByUserName = function(username, callback){
+module.exports.getUserByUserName = function (username, callback) {
     // write a JSON query to be excuted by mongose aginst MongoDB
-    const query = {username: username};
+    const query = { username: username };
 
     // Excute the query aginst db
     User.findOne(query, callback);
+}
+
+module.exports.addUser = function (newUser, callback) {
+    // hash password 
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    });
 }
 
 
