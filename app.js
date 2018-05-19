@@ -8,21 +8,26 @@ const passport = require('passport');
 
 const app = express();
 
-const users = require('./routes/users');
+// set port to serve backend
 const port = 3000;
+
+// load routing defined in users file. 
+//this is better than defining all the rouring in one file
+const users = require('./routes/users');
+app.use('/users', users);
 
 // CORS middleware
 app.use(cors());
 
-// set static folder
+// set static folder to serve ui angular part
 app.use(express.static(path.join(__dirname, 'public')));
 
 // body parser middleware
+// Parse incoming request bodies in a middleware before your handlers.
 app.use(bodyParser.json());
 
-app.use('/users', users);
-
-// Index route
+// Index route 
+// use this route for any request that doesn't matach any route
 app.get('/', (req, res) =>{
     res.send("Invalid endpont");
 })
