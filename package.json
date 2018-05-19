@@ -1,0 +1,30 @@
+{
+  "name": "meanauthapp",
+  "version": "1.0.0",
+  "description": "M.E.A.N stack auth. app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asalhani/Mean_Auth_App.git"
+  },
+  "author": "asalhani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asalhani/Mean_Auth_App/issues"
+  },
+  "homepage": "https://github.com/asalhani/Mean_Auth_App#readme",
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "bcryptjs": "*",
+    "cors": "*",
+    "jsonwebtoken": "*",
+    "body-parser": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  }
+}
