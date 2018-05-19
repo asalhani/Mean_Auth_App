@@ -4,7 +4,26 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
-// const mongoose = require('mongoose');
+
+// helper module to connect to MongoDB
+const mongoose = require('mongoose');
+
+// store MongoDB connection settings in a diffrent file.
+const config = require('./config/database');
+
+// test MongoDB connection
+mongoose.connection.on('connected', () =>{
+    console.log('Connected to database' + config.database);
+});
+
+// test MongoDB connection
+mongoose.connection.on('error', (err) =>{
+    console.error('database error: ==> ' + err);
+});
+
+// connect to MongoDB
+mongoose.connect(config.database);
+
 
 const app = express();
 
@@ -28,11 +47,11 @@ app.use(bodyParser.json());
 
 // Index route 
 // use this route for any request that doesn't matach any route
-app.get('/', (req, res) =>{
+app.get('/', (req, res) => {
     res.send("Invalid endpont");
 })
 
 // Start server
-app.listen(port, () =>{
-    console.log("server started on port " + port); 
+app.listen(port, () => {
+    console.log("server started on port " + port);
 });  
